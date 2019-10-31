@@ -1,23 +1,65 @@
 <template>
-    <nav>
-        <router-link :to="{ name: 'timer' }">Timer</router-link>
-        <router-link :to="{ name: 'settings' }">Settings</router-link>
-    </nav>
+    <div class="navigation">
+        <nav>
+            <router-link :to="{ name: 'timer' }" title="Timer">
+                <svg class="nav__icon">
+                    <use :xlink:href="`${baseUrl}icons/sprite.svg#chronometer`"></use>
+                </svg>
+            </router-link>
+            <router-link :to="{ name: 'settings' }" title="Settings">
+                <svg class="nav__icon">
+                    <use :xlink:href="`${baseUrl}icons/sprite.svg#gear`"></use>
+                </svg>
+            </router-link>
+        </nav>
+    </div>
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            baseUrl: process.env.BASE_URL
+        }
+    }
 }
 </script>
 <style lang="scss">
-nav {
-    padding: 30px;
-    a {
-        font-weight: bold;
-        color: #2c3e50;
+@import "../sass/_variables";
 
-        &.router-link-exact-active {
-        color: #42b983;
+.navigation {
+    margin: 0 3rem 2rem 3rem;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    max-width: 40rem;
+    padding: 1rem 0;
+    margin: 0 auto;
+
+    a {
+        color: $color-primary;
+        text-decoration: none;
+        border-radius: 50%;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        transition: all .3s;
+
+        svg {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+        
+        &:hover, &:active {
+            box-shadow: 0px 3px 10px rgba(0,0,0,.1);
+            background-color: #f3f3f3;
+
+            svg {
+                fill: $color-theme-1;
+            }
         }
     }
 }

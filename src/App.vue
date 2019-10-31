@@ -13,11 +13,22 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "sass/_base";
+@import "sass/_variables";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: $background-primary;
+  color: $color-primary;
+}
+
+svg {
+  fill: #f3f3f3;
+  width: 3rem;
+  height: 3rem;
 }
 </style>
