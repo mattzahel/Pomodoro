@@ -6,7 +6,7 @@
                     <use :xlink:href="`${baseUrl}icons/sprite.svg#chronometer`"></use>
                 </svg>
             </router-link>
-            <router-link :to="{ name: 'about' }" title="About pomodoro">
+            <router-link :to="{ name: 'about' }" title="About">
                 <svg class="nav__icon">
                     <use :xlink:href="`${baseUrl}icons/sprite.svg#question-mark`"></use>
                 </svg>
@@ -59,13 +59,22 @@ nav {
         }
         
         &:hover, &:active {
-            box-shadow: 0px 3px 10px rgba(0,0,0,.1);
-            background-color: #f3f3f3;
+            // box-shadow: 0px 3px 10px rgba(0,0,0,.1);
+            background-color: rgba(243, 243, 243, .5);
 
             svg {
                 fill: $color-theme-1;
             }
         }
+    }
+}
+
+.router-link-exact-active {
+    box-shadow: 0px 3px 10px rgba(0,0,0,.1);
+    background-color: #f3f3f3;
+
+    svg {
+        fill: $color-theme-1;
     }
 }
 </style>

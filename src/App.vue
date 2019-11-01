@@ -41,6 +41,16 @@ export default {
   background-color:$background-secondary;
 }
 
+.container {
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  max-width: 40rem;
+
+  @media screen and (min-width: 967px) {
+    max-width: 780px;
+  }
+}
+
 svg {
   fill: #f3f3f3;
   width: 3rem;
