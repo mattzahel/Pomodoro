@@ -1,12 +1,12 @@
 <template>
   <div class="settings__control">
-    <button class="settings__btn" @click="$emit('changeTime', value - 60)" :disabled="value <= min">
+    <button class="settings__btn" :disabled="value <= min">
       <svg>
         <use :xlink:href="`${baseUrl}icons/sprite.svg#minus`"></use>
       </svg>
     </button>
     <span class="settings__time">{{value | secToMin}}:00</span>
-     <button class="settings__btn" @click="$emit('changeTime', value + 60)" :disabled="value >= max">
+     <button class="settings__btn" :disabled="value >= max">
       <svg>
         <use :xlink:href="`${baseUrl}icons/sprite.svg#plus`"></use>
       </svg>
@@ -16,9 +16,7 @@
 <script>
 export default {
   name: 'settingsControl',
-  props: [
-    'value', 'min', 'max'
-  ],
+  props: ['value', 'min', 'max'],
   data() {
     return {
       baseUrl: process.env.BASE_URL 
@@ -60,13 +58,5 @@ export default {
       }
     }
     
-    &:hover {
-        // box-shadow: 0px 3px 10px rgba(0,0,0,.1);
-        // background-color: rgba(255,255,255,.75);
-
-        svg {
-            // fill: $color-theme-1;
-        }
-    }
   }
 </style>

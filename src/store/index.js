@@ -8,7 +8,8 @@ export default new Vuex.Store({
     session: 1500,
     shortBreak: 300,
     longBreak: 1200, 
-    activeMode: 'session'
+    activeMode: 'session',
+    darkMode: false,
   },
   mutations: {
     // SET_SESSION_DURATION(state, payload) {
@@ -19,7 +20,10 @@ export default new Vuex.Store({
     // },
     // SET_LONG_BREAK_DURATION(state, payload) {
     //   state.longBreak = payload;
-    // }
+    // },
+    TOGGLE_DARK_MODE(state) {
+      state.darkMode = !state.darkMode;
+    }
   },
   actions: {
   },

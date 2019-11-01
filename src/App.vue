@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <Navbar />
-    <router-view/>
+    <div class="app__wrapper"  v-bind:class="{ dark: darkMode }">
+      <Navbar />
+      <router-view/>
+    </div>
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 import Navbar from '@/components/Navbar.vue'
 export default {
   components: {
     Navbar
+  },
+  computed: {
+    ...mapState(['darkMode'])
   }
 }
 </script>
@@ -16,14 +22,22 @@ export default {
 @import "sass/_base";
 @import "sass/_variables";
 
+
 #app {
-  min-height: 100vh;
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+
+}
+.app__wrapper {
+  min-height: 100vh;
   background-color: $background-primary;
   color: $color-primary;
+}
+
+.dark {
+  background-color:$background-secondary;
 }
 
 svg {

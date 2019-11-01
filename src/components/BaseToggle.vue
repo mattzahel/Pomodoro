@@ -1,11 +1,26 @@
 <template>
   <div class="toggle__wrapper">
-    <input type="checkbox" name="toggle" class="switch" id="toggle-1" checked>
+    <input type="checkbox" name="toggle" class="switch" id="toggle-1" :checked="darkMode" @click="TOGGLE_DARK_MODE">
     <label for="toggle-1"></label>
   </div>
 </template>
 <script>
+import {mapState, mapMutations} from 'vuex'
 
+export default {
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    ...mapMutations(['TOGGLE_DARK_MODE'])
+  },
+  computed: {
+    ...mapState(['darkMode']),
+    
+  }
+}
 </script>
 <style lang="scss">
 $sw-height: 3.5rem;
@@ -68,7 +83,7 @@ input{
     &:checked{
       & + label:before {
         width: $sw-width;
-        background: #313B4B;
+        background: #000;
         transition: width .2s cubic-bezier(0,0,0,.1);
       }
       

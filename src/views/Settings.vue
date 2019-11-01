@@ -19,19 +19,17 @@
         Long Break Duration
       </h2>
         <SettingsControl :value="longBreak" :min="longBreakMin" :max="longBreakMax"/>
-      <!-- component -->
     </div>
     <div class="settings__element">
       <h2 class="settings__title">
         Dark mode
       </h2>
       <BaseToggle />
-      <!-- component -->
     </div>
   </div>
 </template>
 <script>
-import {mapState, mapMutations} from 'vuex';
+import {mapState} from 'vuex';
 import SettingsControl from "@/components/SettingsControl.vue";
 import BaseToggle from "@/components/BaseToggle.vue";
 
@@ -58,7 +56,7 @@ export default {
   },
   computed: {
     ...mapState(['session', 'shortBreak', 'longBreak']),
-    ...mapMutations(['SET_SESSION_DURATION', 'SET_BREAK_DURATION', 'SET_LONG_BREAK_DURATION'])
+    // ...mapMutations(['SET_SESSION_DURATION', 'SET_BREAK_DURATION', 'SET_LONG_BREAK_DURATION'])
   }
 }
 </script>
@@ -70,8 +68,6 @@ export default {
      @media screen and (min-width: 768px) {
         font-size: 3.5rem;
       }
-  }
-  h2 {
   }
   .settings__element {
     margin-bottom: 3rem;
