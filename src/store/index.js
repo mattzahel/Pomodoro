@@ -12,15 +12,15 @@ export default new Vuex.Store({
     darkMode: false,
   },
   mutations: {
-    // SET_SESSION_DURATION(state, payload) {
-    //   state.session = payload;
-    // },
-    // SET_BREAK_DURATION(state, payload) {
-    //   state.shortBreak = payload;
-    // },
-    // SET_LONG_BREAK_DURATION(state, payload) {
-    //   state.longBreak = payload;
-    // },
+    SET_SESSION_DURATION(state, payload) {
+      state.session = payload;
+    },
+    SET_BREAK_DURATION(state, payload) {
+      state.shortBreak = payload;
+    },
+    SET_LONG_BREAK_DURATION(state, payload) {
+      state.longBreak = payload;
+    },
     TOGGLE_DARK_MODE(state) {
       state.darkMode = !state.darkMode;
     }

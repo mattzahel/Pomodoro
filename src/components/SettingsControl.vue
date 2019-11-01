@@ -1,12 +1,12 @@
 <template>
   <div class="settings__control">
-    <button class="settings__btn" :disabled="value <= min">
+    <button class="settings__btn" @click="$emit('changeDuration', value - 60)" :disabled="value <= min">
       <svg>
         <use :xlink:href="`${baseUrl}icons/sprite.svg#minus`"></use>
       </svg>
     </button>
     <span class="settings__time">{{value | secToMin}}:00</span>
-     <button class="settings__btn" :disabled="value >= max">
+     <button class="settings__btn" @click="$emit('changeDuration', value + 60)" :disabled="value >= max">
       <svg>
         <use :xlink:href="`${baseUrl}icons/sprite.svg#plus`"></use>
       </svg>
@@ -58,5 +58,11 @@ export default {
       }
     }
     
+    &:disabled {
+      cursor:not-allowed;
+      svg {
+        fill: grey;
+      }
+    }
   }
 </style>

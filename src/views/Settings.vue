@@ -6,19 +6,19 @@
       <h2 class="settings__title">
         Session Duration
       </h2>
-      <SettingsControl :value="session" :min="sessionMin" :max="sessionMax"/>
+      <SettingsControl :value="session" :min="sessionMin" :max="sessionMax" @changeDuration="SET_SESSION_DURATION"/>
     </div>
     <div class="settings__element">
       <h2 class="settings__title">
         Break Duration
       </h2>
-        <SettingsControl :value="shortBreak" :min="shortBreakMin" :max="shortBreakMax"/>
+        <SettingsControl :value="shortBreak" :min="shortBreakMin" :max="shortBreakMax" @changeDuration="SET_BREAK_DURATION"/>
     </div>
     <div class="settings__element">
       <h2 class="settings__title">
         Long Break Duration
       </h2>
-        <SettingsControl :value="longBreak" :min="longBreakMin" :max="longBreakMax"/>
+        <SettingsControl :value="longBreak" :min="longBreakMin" :max="longBreakMax" @changeDuration="SET_LONG_BREAK_DURATION" />
     </div>
     <div class="settings__element">
       <h2 class="settings__title">
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 import SettingsControl from "@/components/SettingsControl.vue";
 import BaseToggle from "@/components/BaseToggle.vue";
 
@@ -50,13 +50,10 @@ export default {
     }
   },
   methods: {
-    // changeTime() {
-    //   this.$store.commit('SET_SESSION_DURATION')
-    // }
+    ...mapMutations(['SET_SESSION_DURATION', 'SET_BREAK_DURATION', 'SET_LONG_BREAK_DURATION'])
   },
   computed: {
     ...mapState(['session', 'shortBreak', 'longBreak']),
-    // ...mapMutations(['SET_SESSION_DURATION', 'SET_BREAK_DURATION', 'SET_LONG_BREAK_DURATION'])
   }
 }
 </script>
