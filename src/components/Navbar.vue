@@ -6,6 +6,11 @@
                     <use :xlink:href="`${baseUrl}icons/sprite.svg#chronometer`"></use>
                 </svg>
             </router-link>
+            <router-link :to="{ name: 'about' }" title="About pomodoro">
+                <svg class="nav__icon">
+                    <use :xlink:href="`${baseUrl}icons/sprite.svg#question-mark`"></use>
+                </svg>
+            </router-link>
             <router-link :to="{ name: 'settings' }" title="Settings">
                 <svg class="nav__icon">
                     <use :xlink:href="`${baseUrl}icons/sprite.svg#gear`"></use>
