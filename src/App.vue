@@ -23,7 +23,6 @@ export default {
 @import "sass/_base";
 @import "sass/_variables";
 
-
 #app {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;

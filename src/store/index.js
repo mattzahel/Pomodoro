@@ -9,7 +9,8 @@ export default new Vuex.Store({
     shortBreak: 300,
     longBreak: 1200, 
     activeMode: 'session',
-    darkMode: false,
+    darkMode: true,
+    tasks: []
   },
   mutations: {
     SET_SESSION_DURATION(state, payload) {
@@ -23,9 +24,18 @@ export default new Vuex.Store({
     },
     TOGGLE_DARK_MODE(state) {
       state.darkMode = !state.darkMode;
+    },
+    SET_TASK(state, task) {
+      state.tasks.push({
+        title: task,
+        done: false
+      });
     }
   },
   actions: {
+    addTask({commit}, payload) {
+      commit('SET_TASK', payload)
+    }
   },
   getters: {
     // secTimeToString(secs) {
