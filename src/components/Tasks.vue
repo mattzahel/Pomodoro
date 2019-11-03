@@ -1,6 +1,6 @@
 <template>
   <section class="tasks">
-    <h1>Tasks</h1>
+    <h1>Things to do</h1>
     <form class="tasks__form" @submit.prevent="addTask">
       <input type="text" placeholder="Your task..." class="tasks__title" v-model="newTask" required>
       <input type="submit" value='Add task'>
@@ -9,9 +9,9 @@
       <ul class="tasks__list">
         <li v-for="(task, i) in tasks" :key="i" class="tasks__elem">
          <label class="checkbox-label">
-            <input type="checkbox" :checked="task.done">
-            <span class="checkbox-custom rectangular"></span>
-            <span class="task__title">{{task.title}}</span>
+          <input type="checkbox" :checked="task.done" @click="changeTaskStatus(task)">
+          <span class="checkbox-custom"></span>
+          <span class="task__title" :class="{'task--done': task.done}">{{task.title}}</span>
         </label>
        </li>
       </ul>
@@ -31,6 +31,9 @@ export default {
       this.$store.dispatch('addTask', this.newTask).then(() => {
         this.newTask = '';
       })
+    },
+    changeTaskStatus(task) {
+      this.$store.commit('CHANGE_TASK_STATUS', task);
     }
   },
   computed: {
@@ -98,9 +101,10 @@ export default {
 }
 .task__title {
   margin-left: .5rem;
+  transition: all .3s;
 }
 
-.task__done {
+.task--done {
   text-decoration: line-through;
   color: grey;
 }

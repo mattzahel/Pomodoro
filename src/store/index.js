@@ -30,6 +30,9 @@ export default new Vuex.Store({
         title: task,
         done: false
       });
+    },
+    CHANGE_TASK_STATUS(state, task) {
+      task.done = !task.done;
     }
   },
   actions: {

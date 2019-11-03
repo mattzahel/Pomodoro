@@ -58,12 +58,13 @@ nav {
             height: 3.5rem;
         }
         
-        &:hover, &:active {
-            // box-shadow: 0px 3px 10px rgba(0,0,0,.1);
-            background-color: rgba(243, 243, 243, .5);
+        @media screen and (min-width: 768px) {
+                &:hover {
+                background-color: rgba(243, 243, 243, .5);
 
-            svg {
-                fill: $color-theme-1;
+                svg {
+                    fill: $color-theme-1;
+                }
             }
         }
     }
