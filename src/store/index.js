@@ -1,7 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import ProgressBar from 'progressbar.js'
 
 Vue.use(Vuex)
+
+function secTimeToString(secs) {
+  const min = Math.floor(secs/60)
+  const sec = secs % 60
+
+  let secString;
+
+  if (sec < 10) {
+    secString = '0' + sec
+  } else {
+    secString = sec
+  }
+  return `${min}:${secString}`
+}
+
 
 export default new Vuex.Store({
   state: {
@@ -10,7 +26,8 @@ export default new Vuex.Store({
     longBreak: 1200, 
     activeMode: 'session',
     darkMode: true,
-    tasks: []
+    tasks: [],
+    container: null
   },
   mutations: {
     SET_SESSION_DURATION(state, payload) {
@@ -33,6 +50,39 @@ export default new Vuex.Store({
     },
     CHANGE_TASK_STATUS(state, task) {
       task.done = !task.done;
+    },
+
+    // timer mutations
+    SET_PROGRESS_CONTAINER(state, el) {
+      state.container = el;
+    },
+    DRAW_TIMER(state) {
+      var bar = new ProgressBar.Circle(state.container, {
+        text: {
+          style: {
+            fontSize: '4rem',
+            color: '#f3f3f3',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: {
+              prefix: true,
+              value: 'translate(-50%, -50%)',
+            },
+          },
+          value: secTimeToString(state.session)
+        },
+        strokeWidth: 6,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#FF0700',
+        trailColor: '#f3f3f3',
+        trailWidth: 6,
+        svgStyle: null,
+        
+      });
+      
+      bar.animate(0.7); 
     }
   },
   actions: {
@@ -41,20 +91,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    // secTimeToString(secs) {
-    //   const min = Math.floor(secs/60);
-    //   const sec = secs % 60;
-
-    //   let secString;
-
-    //   if (sec < 10) {
-    //     secString = '0' + sec
-    //   } else {
-    //     secString = sec
-    //   }
-    //   return `${min}:${secString}`
-    // }
   },
   modules: {
-  }
+  },
 })

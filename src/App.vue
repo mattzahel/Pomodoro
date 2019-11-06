@@ -50,7 +50,7 @@ export default {
   }
 }
 
-svg {
+.icon {
   fill: #f3f3f3;
   width: 3rem;
   height: 3rem;

@@ -1,24 +1,30 @@
 <template>
   <div class="timer">
-    <!-- <h1>Timer</h1> -->
-    <Tasks />
+    <TimerWidget />
+    <!-- <Tasks /> -->
   </div>
 </template>
 
 <script>
-import  Tasks from "@/components/Tasks.vue";
+import  TimerWidget from "@/components/TimerWidget.vue";
+// import  Tasks from "@/components/Tasks.vue";
 
 export default {
   name: 'timer',
   components: {
-    Tasks
+    TimerWidget, 
+    // Tasks
   }
 }
 </script>
 <style lang="scss">
-  // .timer {
-  //   width: 100%;
-  //   display: grid;
-  //   grid-template-columns: repeat(2, 1fr);
-  // }
+  .timer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>
