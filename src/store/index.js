@@ -22,9 +22,9 @@ function secTimeToString(secs) {
 export default new Vuex.Store({
   state: {
     tasks: [],
-    session: 1500,
-    shortBreak: 300,
-    longBreak: 1200, 
+    session: 10,
+    shortBreak: 8,
+    longBreak: 60, 
     activeMode: 'session',
     pomodoroCounter: 0,
     darkMode: true,
@@ -32,6 +32,7 @@ export default new Vuex.Store({
     container: null,
     secLeft: null,
     progressStep: null,
+    progress: 0,
     paused: true,
     interval: null
   },
@@ -61,9 +62,13 @@ export default new Vuex.Store({
     SET_PROGRESS_CONTAINER(state, el) {
       state.container = el;
     },
+    SET_ACTIVE_MODE (state, value) {
+      state.activeMode = value
+    },
     DRAW_TIMER(state) {
       state.circle = new ProgressBar.Circle(state.container, {
         text: {
+          value: secTimeToString(state.session),
           style: {
             fontSize: '4rem',
             color: '#f3f3f3',
@@ -75,7 +80,7 @@ export default new Vuex.Store({
               value: 'translate(-50%, -50%)',
             },
           },
-          value: secTimeToString(state.session)
+          
         },
         strokeWidth: 6,
         easing: 'easeInOut',
@@ -86,11 +91,22 @@ export default new Vuex.Store({
         svgStyle: null,
         
       });
-      state.circle.animate(0.7); 
     },
     RUN_TIMER(payload) {
       // console.log(payload);
       payload.secLeft--;
+    },
+    CALC_STEP(state) {
+      if (state.activeMode === 'session') {
+        state.progressStep = 1 / state.session
+      } else if (state.activeMode === 'shortBreak') {
+        state.progressStep = 1 / state.shortBreak
+      } else {
+        state.progressStep = 1 / state.longBreak
+      }
+    },
+    SET_PROGRESS(state, value) {
+      state.progress = value
     },
     SET_SECS_LEFT(state, payload) {
       state.secLeft = payload
@@ -105,19 +121,45 @@ export default new Vuex.Store({
     addTask({commit}, payload) {
       commit('SET_TASK', payload)
     },
-    activateTimer({commit, state}) {
-      commit("SET_PAUSE_STATE", false);
-      if(state.secLeft === null && state.activeMode === 'session') {
-        commit('SET_SECS_LEFT', state.session);
-      } else if(state.secLeft === null && state.activeMode === 'shortBreak') {
-        commit('SET_SECS_LEFT', state.shortBreak);
-      } else if(state.secLeft === null && state.activeMode === 'longBreak') {
-        commit('SET_SECS_LEFT', state.longBreak);
-      }
+    animateTimer({commit, dispatch, state}) {
+      dispatch("activateTimer");
       state.interval = setInterval(() => {
+        commit('SET_PROGRESS', state.progress + state.progressStep)
         commit('RUN_TIMER', state.secLeft);
-        state.circle.setText(secTimeToString(state.secLeft))
+
+        if(state.secLeft < 0) {
+          clearInterval(state.interval);
+          if(state.activeMode === 'session' && state.pomodoroCounter < 4) {
+            commit('SET_ACTIVE_MODE', 'shortBreak');
+            state.pomodoroCounter++;
+          } else if(state.activeMode === 'session' && state.pomodoroCounter === 4) {
+            commit('SET_ACTIVE_MODE', 'longBreak');
+            state.pomodoroCounter = 0;
+          } else if(state.activeMode === 'shortBreak' || state.activeMode === 'longBreak') {
+            commit('SET_ACTIVE_MODE', 'session');
+          }
+          // notification after finished long break (pomodoro done) and reset
+          return dispatch('animateTimer');
+        }
+          state.circle.setText(secTimeToString(state.secLeft));
+          state.circle.animate(state.progress, {
+          duration: 1000
+        });
       }, 1000)
+    },
+    activateTimer({commit, state}) {
+      commit("CALC_STEP");
+      commit("SET_PAUSE_STATE", false);
+      if(!state.paused && state.activeMode === 'session') {
+        commit('SET_SECS_LEFT', state.session);
+        commit('SET_PROGRESS', 0)
+      } else if(!state.paused && state.activeMode === 'shortBreak') {
+        commit('SET_SECS_LEFT', state.shortBreak);
+        commit('SET_PROGRESS', 0)
+      } else if(!state.paused && state.activeMode === 'longBreak') {
+        commit('SET_SECS_LEFT', state.longBreak);
+        commit('SET_PROGRESS', 0)
+      }
     },
     pauseTimer({commit, state}) {
       commit("SET_PAUSE_STATE", true);
@@ -126,9 +168,11 @@ export default new Vuex.Store({
     resetTimer({commit, state}) {
       commit("SET_PAUSE_STATE", true);
       clearInterval(state.interval);
+      state.circle.destroy();
       state.secLeft = state.session;
-      state.circle.setText(secTimeToString(state.secLeft))
-
+      state.progress = 0;
+      state.pomodoroCounter = 0;
+      commit('DRAW_TIMER');
     }
   },
   getters: {

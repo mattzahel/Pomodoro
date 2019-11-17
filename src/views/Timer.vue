@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     activateTimer() {
-      this.$store.dispatch('activateTimer', this.activeMode);
+      this.$store.dispatch('animateTimer');
     },
     pauseTimer() {
       this.$store.dispatch('pauseTimer');
