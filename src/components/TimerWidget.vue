@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Timer</h1>
+    <h1>{{activeMode | capitalizeFirst}}</h1>
     <div class="progress">
       <div class="progress__container" ref="progress"></div>
     </div>
@@ -12,6 +12,18 @@ export default {
   mounted() {
     this.$store.commit('SET_PROGRESS_CONTAINER', this.$refs.progress);
     this.$store.commit('DRAW_TIMER');
+  },
+  computed: {
+    activeMode() {
+      return this.$store.state.activeMode;
+    } 
+  },
+  filters: {
+    capitalizeFirst(value) {
+      if(!value) return
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    }
   }
 }
 </script>
@@ -29,6 +41,7 @@ export default {
     &__container {
       width: 100%;
       height: 100%;
+      margin: 0 1rem;
     }
   }
 </style>

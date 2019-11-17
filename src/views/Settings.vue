@@ -66,7 +66,7 @@ export default {
         font-size: 3.5rem;
       }
   }
-  .settings__element {
+  .settings__element:not(:last-child) {
     margin-bottom: 3rem;
   }
   .settings__title {

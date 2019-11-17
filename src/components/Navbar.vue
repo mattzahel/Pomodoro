@@ -3,7 +3,7 @@
         <nav>
             <router-link :to="{ name: 'timer' }" title="Timer">
                 <svg class="icon nav__icon">
-                    <use :xlink:href="`${baseUrl}icons/sprite.svg#chronometer`"></use>
+                    <use :xlink:href="`${baseUrl}icons/sprite.svg#timer`"></use>
                 </svg>
             </router-link>
             <router-link :to="{ name: 'about' }" title="About">
@@ -13,7 +13,7 @@
             </router-link>
             <router-link :to="{ name: 'settings' }" title="Settings">
                 <svg class="icon nav__icon">
-                    <use :xlink:href="`${baseUrl}icons/sprite.svg#gear`"></use>
+                    <use :xlink:href="`${baseUrl}icons/sprite.svg#settings`"></use>
                 </svg>
             </router-link>
         </nav>
