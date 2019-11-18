@@ -109,11 +109,9 @@ export default new Vuex.Store({
     },
     SET_SECS_LEFT(state, payload) {
       state.secLeft = payload
-      console.log(state.session)
     },
     SET_PAUSE_STATE(state, payload) {
       state.paused = payload;
-      console.log(payload)
     }
   },
   actions: {
