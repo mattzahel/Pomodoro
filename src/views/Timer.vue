@@ -41,4 +41,14 @@ export default {
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  .timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 3rem 0 6rem 0;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+  }
 </style>

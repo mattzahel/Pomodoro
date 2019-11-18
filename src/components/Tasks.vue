@@ -46,11 +46,12 @@ export default {
 <style lang="scss">
 .tasks {
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 5vh auto 0 auto;
   min-height: 95vh;
 
   @media screen and (min-width: 768px) {
     max-width: 70rem;
+    margin: 0 auto;
   }
 
   &__form {

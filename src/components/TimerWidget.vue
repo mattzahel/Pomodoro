@@ -22,8 +22,8 @@ export default {
 </script>
 <style lang="scss" scoped>
   .progress {
-    max-width: 22rem;
-    height: 22rem;
+    max-width: 25rem;
+    height: 25rem;
     margin: 1rem auto;
 
     @media screen and (min-width: 768px) {

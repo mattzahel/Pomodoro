@@ -14,7 +14,7 @@ export default {
 </script>
 <style lang="scss">
   .counter {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 
     @media screen and (min-width: 768px) {
       font-size: 2.4rem;
