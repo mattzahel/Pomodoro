@@ -50,5 +50,9 @@ export default {
     @media screen and (min-width: 768px) {
       display: block;
     }
+
+    @media screen and (orientation: landscape) {
+      display: block;
+    }
   }
 </style>

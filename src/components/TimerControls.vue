@@ -32,6 +32,10 @@ export default {
 <style lang="scss">
 .timer {
   height: calc(100vh - 9rem);
+
+  @media screen and (orientation: landscape){
+    height: auto;
+  }
     &__controls {
       display: flex;
       justify-content: center;
