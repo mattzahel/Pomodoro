@@ -3,8 +3,10 @@
     <TimerWidget />
     <!-- <Tasks /> -->
     <div class="timer__controls">
-      <BaseButton icon="play-button" @btnEvent="activateTimer" v-if="paused" />
-      <BaseButton icon="pause-button" @btnEvent="pauseTimer" v-if="!paused" />
+      <!-- <BaseButton icon="play-button" @btnEvent="activateTimer" v-if="paused" />
+      <BaseButton icon="pause-button" @btnEvent="pauseTimer" v-if="!paused" /> -->
+      <BaseButton icon="play-button" @btnEvent="activateTimer" v-if="paused!=false"/>
+      <BaseButton icon="pause-button" @btnEvent="pauseTimer" v-if="paused!=null && paused!=true"/>
       <BaseButton icon="stop-button" @btnEvent="resetTimer" />
     </div>
   </div>

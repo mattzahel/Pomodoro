@@ -22,9 +22,9 @@ function secTimeToString(secs) {
 export default new Vuex.Store({
   state: {
     tasks: [],
-    session: 10,
-    shortBreak: 8,
-    longBreak: 60, 
+    session: 1500,
+    shortBreak: 300,
+    longBreak: 1200, 
     activeMode: 'session',
     pomodoroCounter: 0,
     darkMode: true,
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     secLeft: null,
     progressStep: null,
     progress: 0,
-    paused: true,
+    paused: null,
     interval: null
   },
   mutations: {
@@ -141,15 +141,15 @@ export default new Vuex.Store({
           // notification after finished long break (pomodoro done) and reset
           return dispatch('animateTimer');
         }
-          state.circle.setText(secTimeToString(state.secLeft));
-          state.circle.animate(state.progress, {
+        state.circle.animate(state.progress, {
           duration: 1000
-        });
+        }); //fix error
+        state.circle.setText(secTimeToString(state.secLeft));
       }, 1000)
     },
     activateTimer({commit, state}) {
+      // fix reset after pause
       commit("CALC_STEP");
-      commit("SET_PAUSE_STATE", false);
       if(!state.paused && state.activeMode === 'session') {
         commit('SET_SECS_LEFT', state.session);
         commit('SET_PROGRESS', 0)
@@ -160,6 +160,7 @@ export default new Vuex.Store({
         commit('SET_SECS_LEFT', state.longBreak);
         commit('SET_PROGRESS', 0)
       }
+      commit("SET_PAUSE_STATE", false);
     },
     pauseTimer({commit, state}) {
       commit("SET_PAUSE_STATE", true);
@@ -176,6 +177,11 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    activeModeName(state) {
+      if (state.activeMode === 'session') return 'Session'
+      else if (state.activeMode === 'shortBreak') return 'Short break'
+      else if (state.activeMode === 'longBreak') return 'Long break'
+    }
   },
   modules: {
   },
