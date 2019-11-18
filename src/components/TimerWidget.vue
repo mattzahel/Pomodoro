@@ -33,8 +33,7 @@ export default {
 
     &__container {
       width: 100%;
-      height: 100%;
-      margin: 0 1rem;
+      height: 100%;      
     }
   }
 </style>

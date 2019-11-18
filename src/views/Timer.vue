@@ -1,60 +1,44 @@
 <template>
-  <div class="timer">
-    <TimerWidget />
-    <!-- <Tasks /> -->
-    <div class="timer__controls">
-      <!-- <BaseButton icon="play-button" @btnEvent="activateTimer" v-if="paused" />
-      <BaseButton icon="pause-button" @btnEvent="pauseTimer" v-if="!paused" /> -->
-      <BaseButton icon="play-button" @btnEvent="activateTimer" v-if="paused!=false"/>
-      <BaseButton icon="pause-button" @btnEvent="pauseTimer" v-if="paused!=null && paused!=true"/>
-      <BaseButton icon="stop-button" @btnEvent="resetTimer" />
+  <div class="wrapper">
+    <div class="timer">
+      <TimerWidget />
+      <PomodoroCounter />
+      <TimerControls />
     </div>
+    <Tasks />
   </div>
 </template>
 
 <script>
 import  TimerWidget from "@/components/TimerWidget.vue";
-import  BaseButton from "@/components/BaseButton.vue";
-// import  Tasks from "@/components/Tasks.vue";
+import  TimerControls from "@/components/TimerControls.vue";
+import  PomodoroCounter from "@/components/PomodoroCounter.vue";
+import  Tasks from "@/components/Tasks.vue";
 import {mapState} from 'vuex';
 
 export default {
   name: 'timer',
   components: {
     TimerWidget, 
-    // Tasks,
-    BaseButton
-  },
-  methods: {
-    activateTimer() {
-      this.$store.dispatch('animateTimer');
-    },
-    pauseTimer() {
-      this.$store.dispatch('pauseTimer');
-    },
-    resetTimer() {
-      this.$store.dispatch('resetTimer');
-    }
+    TimerControls,
+    PomodoroCounter,
+    Tasks
   },
   computed: {
-    ...mapState(['activeMode', 'paused'])
+    ...mapState(['activeMode'])
   }
 }
 </script>
 <style lang="scss">
-  .timer {
+  .wrapper {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 992px) {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    &__controls {
-      display: flex;
-      justify-content: center;
-      margin-top: 2rem;
     }
   }
 </style>

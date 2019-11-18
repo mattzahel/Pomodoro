@@ -47,6 +47,7 @@ export default {
 .tasks {
   max-width: 40rem;
   margin: 0 auto;
+  min-height: 95vh;
 
   @media screen and (min-width: 768px) {
     max-width: 70rem;

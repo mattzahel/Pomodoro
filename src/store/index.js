@@ -82,19 +82,18 @@ export default new Vuex.Store({
           },
           
         },
-        strokeWidth: 6,
+        strokeWidth: 3,
         easing: 'easeInOut',
         duration: 1400,
         color: '#FF0700',
         trailColor: '#f3f3f3',
-        trailWidth: 6,
+        trailWidth: 3,
         svgStyle: null,
         
       });
     },
-    RUN_TIMER(payload) {
-      // console.log(payload);
-      payload.secLeft--;
+    RUN_TIMER(state) {
+      state.secLeft--;
     },
     CALC_STEP(state) {
       if (state.activeMode === 'session') {
@@ -125,7 +124,7 @@ export default new Vuex.Store({
       dispatch("activateTimer");
       state.interval = setInterval(() => {
         commit('SET_PROGRESS', state.progress + state.progressStep)
-        commit('RUN_TIMER', state.secLeft);
+        commit('RUN_TIMER');
 
         if(state.secLeft < 0) {
           clearInterval(state.interval);
@@ -148,7 +147,6 @@ export default new Vuex.Store({
       }, 1000)
     },
     activateTimer({commit, state}) {
-      // fix reset after pause
       commit("CALC_STEP");
       if(!state.paused && state.activeMode === 'session') {
         commit('SET_SECS_LEFT', state.session);
@@ -178,7 +176,7 @@ export default new Vuex.Store({
   },
   getters: {
     activeModeName(state) {
-      if (state.activeMode === 'session') return 'Session'
+      if (state.activeMode === 'session') return 'Time to work!'
       else if (state.activeMode === 'shortBreak') return 'Short break'
       else if (state.activeMode === 'longBreak') return 'Long break'
     }
