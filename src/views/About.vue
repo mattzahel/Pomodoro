@@ -33,6 +33,10 @@ export default {
     font-size: 1.6rem;
     text-align: left;
     line-height: 1.5;
+
+    @media screen and (min-width: 992px) {
+      font-size: 1.8rem;
+    }
   }
   h2 {
     font-size: 2.5rem;

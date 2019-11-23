@@ -27,8 +27,13 @@ export default {
     margin: 1rem auto;
 
     @media screen and (min-width: 768px) {
-      max-width: 50rem;
+      height: 30rem;
+      max-width: 30rem;
+    }
+
+    @media screen and (min-width: 1600px) {
       height: 50rem;
+      max-width: 50rem;
     }
 
     &__container {
