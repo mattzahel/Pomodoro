@@ -8,6 +8,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/index.html',
+    redirect: {
+      name: 'timer'
+    }
+  },
+  {
     path: '/',
     name: 'timer',
     component: Timer
