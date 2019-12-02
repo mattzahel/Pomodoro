@@ -2,7 +2,7 @@
   <button @click="clickEvent" class="base-button">
     <slot name="content"></slot>
       <svg class="icon">
-          <use :xlink:href="`${baseUrl}icons/sprite.svg#${icon}`"></use>
+          <use :xlink:href="`${baseUrl}img/icons/sprite.svg#${icon}`"></use>
       </svg>
   </button>
 </template>

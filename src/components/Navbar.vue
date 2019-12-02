@@ -3,17 +3,17 @@
         <nav>
             <router-link :to="{ name: 'timer' }" title="Timer">
                 <svg class="icon nav__icon">
-                    <use :xlink:href="`${baseUrl}icons/sprite.svg#timer`"></use>
+                    <use :xlink:href="`${baseUrl}img/icons/sprite.svg#timer`"></use>
                 </svg>
             </router-link>
             <router-link :to="{ name: 'about' }" title="About">
                 <svg class="icon nav__icon">
-                    <use :xlink:href="`${baseUrl}icons/sprite.svg#question-mark`"></use>
+                    <use :xlink:href="`${baseUrl}img/icons/sprite.svg#question-mark`"></use>
                 </svg>
             </router-link>
             <router-link :to="{ name: 'settings' }" title="Settings">
                 <svg class="icon nav__icon">
-                    <use :xlink:href="`${baseUrl}icons/sprite.svg#settings`"></use>
+                    <use :xlink:href="`${baseUrl}img/icons/sprite.svg#settings`"></use>
                 </svg>
             </router-link>
         </nav>
